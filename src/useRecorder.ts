@@ -4,7 +4,7 @@ import { Context } from './context'
 const useRecorder = () => {
   const [audioURL, setAudioURL] = useState<any>('')
   const [isRecording, setIsRecording] = useState<boolean>(false)
-  const [recorder, setRecorder] = useState<any>()
+  const [recorder, setRecorder] = useState<MediaRecorder>()
   const context = useContext(Context)
   useEffect(() => {
     if (recorder === null) {
@@ -14,9 +14,9 @@ const useRecorder = () => {
       return
     }
     if (isRecording) {
-      recorder.start()
+      recorder?.start()
     } else {
-      recorder.stop()
+      recorder?.stop()
     }
     const handleData = async (e: any) => {
       const blob = e.data
@@ -31,8 +31,8 @@ const useRecorder = () => {
       setAudioURL(URL.createObjectURL(e.data))
     }
 
-    recorder.addEventListener('dataavailable', handleData)
-    return () => recorder.removeEventListener('dataavailable', handleData)
+    recorder?.addEventListener('dataavailable', handleData)
+    return () => recorder?.removeEventListener('dataavailable', handleData)
   }, [recorder, isRecording])
 
   const startRecording = () => {
