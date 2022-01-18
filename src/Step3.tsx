@@ -20,6 +20,7 @@ const Step3: React.FC = () => {
           type="password"
           autoComplete="off"
           required
+          onChange={(e) => context.updateState(e)}
           placeholder="Password"
         />
         <TextField

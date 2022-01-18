@@ -1,13 +1,11 @@
-import { TextField, Button, Typography, FormControl } from '@mui/material'
+import { TextField, Typography } from '@mui/material'
 import { useContext } from 'react'
 import { Context, ContextType } from './context'
 import NextButton from './NextButton'
 
 const Step1: React.FC = () => {
   const context: ContextType = useContext(Context)
-  const updateState = (e: any) => {
-    context.setState({ ...context.state, [e.target.name]: e.target.value })
-  }
+
   return (
     <div className="flex  justify-center items-center w-4/5 md:w-1/3 h-screen">
       <form className="flex flex-col w-full h-full justify-around">
@@ -23,7 +21,7 @@ const Step1: React.FC = () => {
           placeholder="Full Name"
           value={context.state.name}
           name="name"
-          onChange={updateState}
+          onChange={(e) => context.updateState(e)}
         />
         <TextField
           size="medium"
@@ -36,7 +34,7 @@ const Step1: React.FC = () => {
           placeholder="Email"
           value={context.state.email}
           name="email"
-          onChange={updateState}
+          onChange={(e) => context.updateState(e)}
         />
 
         <TextField
@@ -48,7 +46,7 @@ const Step1: React.FC = () => {
           placeholder="Phone Number"
           value={context.state.number}
           name="number"
-          onChange={updateState}
+          onChange={(e) => context.updateState(e)}
         />
         <NextButton />
       </form>

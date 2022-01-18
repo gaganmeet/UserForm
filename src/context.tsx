@@ -21,6 +21,7 @@ export type ContextType = {
   step: number
   setStep: (step: number) => void
   postState: () => void
+  updateState: (e: any) => void
   setState: (state: InitialState) => void
 }
 type Props = {
@@ -31,6 +32,9 @@ export const Context = createContext<ContextType>({} as ContextType)
 export const Provider = ({ children }: Props) => {
   const [state, setState] = useState<InitialState>(INITIAL_STATE)
   const [step, setStep] = useState<number>(1)
+  const updateState = (e: any) => {
+    setState({ ...state, [e.target.name]: e.target.value })
+  }
   const postState = () => {
     const postData = () => {
       fetch('http://localhost:8000/api', {
@@ -46,7 +50,9 @@ export const Provider = ({ children }: Props) => {
     postData()
   }
   return (
-    <Context.Provider value={{ state, postState, setState, step, setStep }}>
+    <Context.Provider
+      value={{ state, postState, setState, step, setStep, updateState }}
+    >
       {children}
     </Context.Provider>
   )

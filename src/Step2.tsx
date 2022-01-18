@@ -1,11 +1,8 @@
 import { Typography, Button } from '@mui/material'
 import useRecorder from './useRecorder'
-import { Context, ContextType } from './context'
-import { useContext } from 'react'
 import NextButton from './NextButton'
 import BackButton from './BackButton'
 const Step2: React.FC = () => {
-  const context: ContextType = useContext(Context)
   const [audioURL, isRecording, startRecording, stopRecording] = useRecorder()
   return (
     <>
