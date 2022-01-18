@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { Context } from './context'
 const useRecorder = () => {
   const [audioURL, setAudioURL] = useState<any>('')
   const [isRecording, setIsRecording] = useState<boolean>(false)
-  const [recorder, setRecorder] = useState<MediaRecorder>()
+  const [recorder, setRecorder] = useState<any>(null)
   const context = useContext(Context)
   useEffect(() => {
     if (recorder === null) {
