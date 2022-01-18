@@ -7,7 +7,6 @@ import Step4 from './Step4'
 import BackButton from './BackButton'
 function App(): ReactElement {
   const context: ContextType = useContext(Context)
-  console.log(context)
   if (context.step === 1)
     return (
       <>

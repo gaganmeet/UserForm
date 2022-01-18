@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { Context } from './context'
 const useRecorder = () => {
-  const [audioURL, setAudioURL] = useState('')
-  const [isRecording, setIsRecording] = useState(false)
-  const [recorder, setRecorder] = useState(null)
+  const [audioURL, setAudioURL] = useState<any>('')
+  const [isRecording, setIsRecording] = useState<boolean>(false)
+  const [recorder, setRecorder] = useState<any>()
   const context = useContext(Context)
   useEffect(() => {
     if (recorder === null) {
@@ -18,16 +18,15 @@ const useRecorder = () => {
     } else {
       recorder.stop()
     }
-    const handleData = async (e) => {
+    const handleData = async (e: any) => {
       const blob = e.data
-      const blobToBase64 = new Promise((resolve, reject) => {
+      const blobToBase64 = new Promise((resolve, reject): any => {
         const reader = new FileReader()
         reader.readAsDataURL(blob)
         reader.onload = () => resolve(reader.result)
         reader.onerror = (error) => reject(error)
       })
-      const base64data = await blobToBase64
-      //console.log(context.state)
+      const base64data: any = await blobToBase64
       context.setState({ ...context.state, audio: base64data })
       setAudioURL(URL.createObjectURL(e.data))
     }
