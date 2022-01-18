@@ -20,7 +20,7 @@ export type ContextType = {
   state: InitialState
   step: number
   setStep: (step: number) => void
-  postState: (state: InitialState) => void
+  postState: () => void
   setState: (state: InitialState) => void
 }
 type Props = {
@@ -31,8 +31,19 @@ export const Context = createContext<ContextType>({} as ContextType)
 export const Provider = ({ children }: Props) => {
   const [state, setState] = useState<InitialState>(INITIAL_STATE)
   const [step, setStep] = useState<number>(1)
-  const postState = (state: InitialState) => {
-    setState({ ...state })
+  const postState = () => {
+    const postData = () => {
+      fetch('http://localhost:8000/api', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(state)
+      }).then((res) => {
+        console.log(res)
+      })
+    }
+    postData()
   }
   return (
     <Context.Provider value={{ state, postState, setState, step, setStep }}>

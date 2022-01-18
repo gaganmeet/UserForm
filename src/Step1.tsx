@@ -1,6 +1,8 @@
 import { TextField, Button, Typography, FormControl } from '@mui/material'
 import { useContext } from 'react'
 import { Context, ContextType } from './context'
+import NextButton from './NextButton'
+
 const Step1: React.FC = () => {
   const context: ContextType = useContext(Context)
   const updateState = (e: any) => {
@@ -48,14 +50,7 @@ const Step1: React.FC = () => {
           name="number"
           onChange={updateState}
         />
-        <Button
-          type="submit"
-          size="large"
-          variant="text"
-          onClick={() => context.setStep(2)}
-        >
-          Next
-        </Button>
+        <NextButton />
       </form>
     </div>
   )
