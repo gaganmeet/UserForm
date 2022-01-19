@@ -2,8 +2,11 @@ import { Typography, Button } from '@mui/material'
 import useRecorder from './useRecorder'
 import NextButton from './NextButton'
 import BackButton from './BackButton'
+import { useContext } from 'react'
+import { Context } from './context'
 const Step2: React.FC = () => {
   const [audioURL, isRecording, startRecording, stopRecording] = useRecorder()
+  const context = useContext(Context)
   return (
     <>
       <BackButton />
@@ -21,7 +24,11 @@ const Step2: React.FC = () => {
               stop recording
             </Button>
           </div>
-          <NextButton />
+          <NextButton
+            onClick={() =>
+              context.state.audio && context.setStep(context.step + 1)
+            }
+          />
         </div>
       </div>
     </>

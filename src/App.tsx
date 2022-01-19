@@ -8,10 +8,16 @@ import Step4 from './Step4'
 function App(): ReactElement {
   const context: ContextType = useContext(Context)
   console.log(context)
-  if (context.step === 1) return <Step1 />
-  else if (context.step === 2) return <Step2 />
-  else if (context.step === 3) return <Step3 />
-  else return <Step4 />
+  switch (context.step) {
+    case 1:
+      return <Step1 />
+    case 2:
+      return <Step2 />
+    case 3:
+      return <Step3 />
+    default:
+      return <Step4 />
+  }
 }
 
 export default App
